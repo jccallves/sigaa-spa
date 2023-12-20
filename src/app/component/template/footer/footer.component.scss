@@ -1,0 +1,21 @@
+.footer-container{
+  bottom:0;
+  position: fixed;
+}
+
+mat-toolbar span {
+   font-size: 0.9rem;
+
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    }
+
+.div1 { grid-area: 2 / 6 / 3 / 7; text-align: center; }
+.div2 { grid-area: 3 / 6 / 4 / 7; }
