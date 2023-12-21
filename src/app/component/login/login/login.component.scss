@@ -1,0 +1,38 @@
+.botoes-login {
+  font-size: 12px;
+  width: 100%;
+}
+
+.divisor-login {
+  background-color:  #3f51b5;
+}
+
+.cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100% !important;
+}
+
+.loader {
+  width: 8em;
+  height: 8em;
+  display: block;
+  position: absolute;
+  top: 40%;
+  z-index: 7000;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.container-fluid {
+  padding-top: 10%;
+}
+
+.botao-login {
+  margin-top: 1%;
+}

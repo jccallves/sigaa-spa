@@ -1,25 +1,3 @@
-<mat-toolbar color="primary" class="header mat-elevation-z6">
-  <button mat-icon-button (click)="drawer.toggle()" class="example-icon"
-  aria-label="Example icon-button with menu icon">
-  <mat-icon>menu</mat-icon>
-</button>
-<a  class="title" mat-button href="#" target="_blank">SIGAA</a>
-  <span class="spacer"></span>
-</mat-toolbar>
 
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
 
-    <mat-nav-list>
-      <mat-list-item routerLink="home" (click)="drawer.toggle()" >
-        <mat-icon>login</mat-icon>
-        <span>Entrar</span>
-      </mat-list-item>
-    </mat-nav-list>
 
-  </mat-drawer>
-
-  <mat-drawer-content class="example-mat-drawer-content">
-    <app-body></app-body>
-  </mat-drawer-content>
-</mat-drawer-container>

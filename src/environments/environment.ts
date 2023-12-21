@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8888/',
+  urlLogin: 'http://teste.com:4200/login',
+  urlServicoCep: 'https://viacep.com.br/ws/'
 };
 
 /*

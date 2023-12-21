@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { BodyComponent } from './component/template/body/body.component';
 import { HeaderComponent } from './component/template/header/header.component';
 import { FooterComponent } from './component/template/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './core/services/login.service';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,11 @@ import { FooterComponent } from './component/template/footer/footer.component';
     SharedModule,
     BrowserAnimationsModule,
     RouterModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
