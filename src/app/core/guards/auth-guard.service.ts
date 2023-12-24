@@ -43,7 +43,7 @@ constructor(
       if (this.authService.isAuthenticated()) {
         if (route.data['roles'] && !this.authService.hasPermissao(route.data['roles'])) {
           console.log('sem permissão')
-          this.router.navigate([RotasApp.APP_RAIZ]);
+          this.router.navigate([RotasApp.HOME]);
           return false;
         }
         return true;

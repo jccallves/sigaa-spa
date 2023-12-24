@@ -2,7 +2,7 @@
   <button  mat-icon-button (click)="drawer.toggle()">
   <mat-icon>menu</mat-icon>
   </button>
-  <a  class="title" mat-button href="#" target="_blank">SIGAA</a>
+  <span>SIGAA</span>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
@@ -18,19 +18,36 @@
   <mat-drawer-container class="example-container" autosize [hasBackdrop]="'false'">
     <mat-drawer #drawer [mode]="'side'" class="example-sidenav" opened>
       <mat-nav-list>
-        <mat-list-item routerLink="home" (click)="drawer.toggle()" >
+
+        <div *ngIf="!isLogged_in">
+          <mat-list-item   routerLink="login">
+            <mat-icon>login</mat-icon>
+            <span>Entrar</span>
+          </mat-list-item>
+        </div>
+
+        <mat-list-item routerLink="home" >
           <mat-icon>home</mat-icon>
           <span>Home</span>
         </mat-list-item>
-        <mat-list-item routerLink="/" *ngIf="isLogged_in"  (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Sair</span>
-        </mat-list-item>
 
-        <mat-list-item *ngIf="!isLogged_in"  routerLink="login" (click)="drawer.toggle()" >
-          <mat-icon>login</mat-icon>
-          <span>Entrar</span>
-        </mat-list-item>
+        <div *ngIf="isLogged_in">
+          <mat-list-item routerLink="app/cadastro" >
+            <mat-icon>person_add</mat-icon>
+            <span>Cadastros</span>
+          </mat-list-item>
+          <mat-list-item routerLink="/"   (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+          </mat-list-item>
+        </div>
+
+
+
+
+
+
+
 
       </mat-nav-list>
     </mat-drawer>

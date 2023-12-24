@@ -1,9 +1,8 @@
-// src\app\shared\components\sidenav\sidenav.component.ts
+import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { delay } from 'rxjs';
 
 
 @Component({
@@ -16,24 +15,15 @@ export class SidenavComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-   constructor(private observer: BreakpointObserver) {}
+  constructor(private observer: BreakpointObserver,
+    private authService: AuthenticationService) { }
 
-   ngOnInit(): void {
+ngOnInit(): void {
 
-   }
+}
 
-   ngAfterViewInit() {
-     this.observer
-      .observe(['(max-width: 800px)'])
-      .pipe(delay(1))
-      .subscribe((res) => {
-        if (res.matches) {
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
-        } else {
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
-        }
-     });
-   }
+  logout(): void {
+    this.authService.logout();
+  }
+
 }

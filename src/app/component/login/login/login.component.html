@@ -9,7 +9,7 @@
         <mat-dialog-content>
           <mat-form-field appearance="outline" color="primary" class="botoes-login">
             <mat-label>CPF</mat-label>
-            <input type="text" matInput placeholder="99999999999" formControlName="cpf" required>
+            <input type="text" matInput placeholder="Sem pontos. Ex: 99999999999" formControlName="cpf" required>
             <mat-error *ngIf="cpf.invalid">{{getCpfErrorMessage()}}</mat-error>
           </mat-form-field>
 

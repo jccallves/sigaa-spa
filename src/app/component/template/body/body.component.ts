@@ -22,7 +22,9 @@ export class BodyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     if (this.authService.getCurrentUser) {
+
       this.authService.setLoggedUser(true);
       this.authService.getCurrentUser.nome
       this.router.navigateByUrl(RotasApp.HOME);
@@ -33,11 +35,13 @@ export class BodyComponent implements OnInit {
         this.nome = name;
       });
     } else {
-      this.authService.setLoggedUser(false);
+      console.log("entrei")
       this.authService.getLoggedUser().subscribe((logged) => {
         this.isLogged_in = logged;
       });
-        this.nome = null;
+      this.authService.getNameLoggedUser().subscribe((name) => {
+        this.nome = name;
+      });
     }
   }
 

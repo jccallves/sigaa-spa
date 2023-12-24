@@ -1,5 +1,6 @@
 export enum RotasApp {
 APP_RAIZ = '/',
 HOME = '/home',
-LOGIN = '/login'
+LOGIN = '/login',
+CADASTRO = '/app/cadastro'
 }
