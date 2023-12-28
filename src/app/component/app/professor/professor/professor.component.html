@@ -48,7 +48,7 @@
             <div class="col-md-6">
               <mat-form-field class="d-grid gap-2">
                 <mat-label>Senha</mat-label>
-                <input matInput placeholder="Senha" formControlName="senha" required>
+                <input type="password" matInput placeholder="Senha" formControlName="senha" required>
                 <mat-error *ngIf="!docsFormGroup.controls['senha'].valid && docsFormGroup.controls['senha'].touched">
                   {{ getErrorSenha() }}
                 </mat-error>
@@ -57,7 +57,7 @@
             <div class="col-md-6">
               <mat-form-field class="d-grid gap-2">
                 <mat-label>Confirmar senha</mat-label>
-                <input matInput placeholder="Confirmar senha" formControlName="confirmacao_senha" required>
+                <input type="password" matInput placeholder="Confirmar senha" formControlName="confirmacao_senha" required>
                 <mat-error *ngIf="!docsFormGroup.controls['confirmacao_senha'].valid && docsFormGroup.controls['confirmacao_senha'].touched">
                   {{ getErrorConfirmaSenha() }}
                 </mat-error>
