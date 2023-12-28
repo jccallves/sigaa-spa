@@ -5,7 +5,7 @@
 		<div class="col-md-6 d-grid gap-2" [ngClass]="exibirSpinner ? 'container-form block': 'container-form'" novalidate>
       <mat-stepper
       class="example-stepper"
-      orientation="vertical"  #stepper>
+      orientation="vertical" linear="true" #stepper>
       <mat-step [stepControl]="docsFormGroup" label="Preencha seus dados pessoais">
         <form [formGroup]="docsFormGroup">
           <div class="row">
@@ -65,7 +65,7 @@
             </div>
           </div>
           <div>
-            <button mat-button matStepperNext >Próximo</button>
+            <button mat-raised-button color="primary" matStepperNext >Próximo</button>
           </div>
         </form>
       </mat-step>
@@ -119,8 +119,8 @@
             </div>
           </div>
           <div>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext>Próximo</button>
+            <button class="voltar-button-stepper" mat-raised-button color="primary" matStepperPrevious>Voltar</button>
+            <button mat-raised-button color="primary" matStepperNext>Próximo</button>
           </div>
         </form>
       </mat-step>
