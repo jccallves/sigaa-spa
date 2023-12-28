@@ -15,6 +15,13 @@ const routes: Routes = [
         data: {
           roles: [Roles.ADMIN, Roles.USER_EDIT]
         }
+      },
+      {
+        path: 'professor', loadChildren: () => import('./professor/professor.module').then(m => m.ProfessorModule),
+        canActivate: [AuthGuard],
+        data: {
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
+        }
       }
     ]
   },

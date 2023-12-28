@@ -1,0 +1,163 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-6 d-grid gap-2" [ngClass]="exibirSpinner ? 'container-form block': 'container-form'" novalidate>
+      <mat-stepper
+      class="example-stepper"
+      orientation="vertical" linear="true" #stepper>
+      <mat-step [stepControl]="docsFormGroup" label="Preencha seus dados pessoais">
+        <form [formGroup]="docsFormGroup">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Nome" formControlName="nome" required>
+                <mat-error *ngIf="!docsFormGroup.controls['nome'].valid && docsFormGroup.controls['nome'].touched">
+                  {{ getErrorNome() }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" required>
+                <mat-error *ngIf="!docsFormGroup.controls['email'].valid && docsFormGroup.controls['email'].touched">
+                  {{ getErrorEmail() }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <mat-label>CPF</mat-label>
+                <input matInput placeholder="CPF" formControlName="cpf" required>
+                <mat-error *ngIf="!docsFormGroup.controls['cpf'].valid && docsFormGroup.controls['cpf'].touched">
+                  {{ getErrorCpf() }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6"><mat-form-field class="d-grid gap-2">
+              <mat-label>Matrícula</mat-label>
+              <input matInput placeholder="Matricula" formControlName="matricula">
+            </mat-form-field>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <mat-label>Senha</mat-label>
+                <input matInput placeholder="Senha" formControlName="senha" required>
+                <mat-error *ngIf="!docsFormGroup.controls['senha'].valid && docsFormGroup.controls['senha'].touched">
+                  {{ getErrorSenha() }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <mat-label>Confirmar senha</mat-label>
+                <input matInput placeholder="Confirmar senha" formControlName="confirmacao_senha" required>
+                <mat-error *ngIf="!docsFormGroup.controls['confirmacao_senha'].valid && docsFormGroup.controls['confirmacao_senha'].touched">
+                  {{ getErrorConfirmaSenha() }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperNext >Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="addressFormGroup" label="Preencha seu endereço">
+        <form [formGroup]="addressFormGroup">
+          <div class="row">
+            <div class="col-md-2">
+              <mat-form-field class="d-grid gap-2">
+                <input matInput formControlName="cep" placeholder="CEP" required mask="00000-000" (blur)="carregarCepOnBlur()">
+                <button mat-icon-button matSuffix  (click)="carregarCep()" [attr.aria-label]="'Pesquisar CEP'"  type="button" [attr.aria-pressed]="true">
+                  <mat-icon matSuffix>search</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="col-md-10"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <input matInput formControlName="logradouro" placeholder="Rua" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <input matInput formControlName="numero" placeholder="Nº">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <input matInput formControlName="complemento" placeholder="Complemento">
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <input matInput formControlName="localidade" placeholder="Cidade" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <input matInput formControlName="bairro" placeholder="Bairro" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <input matInput formControlName="uf" placeholder="UF" required mask="AA">
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="contactFormGroup" label="Preencha seu telefone">
+        <form [formGroup]="contactFormGroup">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <mat-label>DDD</mat-label>
+                <input matInput formControlName="ddd" placeholder="Ex. 21" required>
+                <mat-error *ngIf="!contactFormGroup.controls['ddd'].valid && contactFormGroup.controls['ddd'].touched">
+                  {{ getErrorDDD() }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="d-grid gap-2">
+                <mat-label>Número</mat-label>
+                <input matInput formControlName="numero" placeholder="Ex. 999999999" required>
+                <mat-error *ngIf="!contactFormGroup.controls['numero'].valid && contactFormGroup.controls['numero'].touched">
+                  {{ getErrorNumero() }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div >
+            <button class="voltar-button-stepper" mat-raised-button color="primary" matStepperPrevious >Voltar</button>
+            <button mat-raised-button color="primary" (click)="salvarUsuario()">Salvar</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+    <div class="loader" *ngIf="exibirSpinner">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+</div>

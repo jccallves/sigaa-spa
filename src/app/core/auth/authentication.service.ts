@@ -47,7 +47,7 @@ export class AuthenticationService {
     let pessoa: Pessoa = new Pessoa;
     this.currentUserSubject.next(pessoa);
     this.setLoggedUser(false);
-    this.router.navigate([RotasApp.HOME])
+    this.router.navigate([RotasApp.LOGIN])
   }
 
   getToken(): string {

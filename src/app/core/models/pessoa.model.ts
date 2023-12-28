@@ -28,7 +28,7 @@ export interface Pessoa {
 export interface Professor extends Pessoa {
 
   matricula: number;
-  pessoa_id: Pessoa;
-  contato_id: Contato;
-  endereco_id: Endereco;
+  pessoa: Pessoa;
+  contato: Contato;
+  endereco: Endereco;
 }

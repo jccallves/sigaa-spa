@@ -11,6 +11,8 @@ import { HeaderComponent } from './component/template/header/header.component';
 import { FooterComponent } from './component/template/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './core/services/login.service';
+import { EndereconService } from './core/services/endereco.service';
+import { ProfessorService } from './core/services/professor.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,9 @@ import { LoginService } from './core/services/login.service';
   ],
   providers: [
     LoginService,
+    EndereconService,
+    ProfessorService
+
   ],
   bootstrap: [AppComponent]
 })
