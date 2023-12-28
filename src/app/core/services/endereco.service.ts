@@ -15,7 +15,7 @@ export class EndereconService {
     this.baseUrl = environment.apiUrl.concat('endereco')
   }
 
-  obterEnderecoPorCep(cep: number): Observable<Endereco>{
+  obterEnderecoPorCep(cep: string): Observable<Endereco>{
     return this.http.get<Endereco>(`${this.baseUrl}/cep?cep=${cep}`);
   }
 

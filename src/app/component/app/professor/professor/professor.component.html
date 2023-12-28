@@ -5,7 +5,7 @@
 		<div class="col-md-6 d-grid gap-2" [ngClass]="exibirSpinner ? 'container-form block': 'container-form'" novalidate>
       <mat-stepper
       class="example-stepper"
-      orientation="vertical" linear="true" #stepper>
+      orientation="vertical"  #stepper>
       <mat-step [stepControl]="docsFormGroup" label="Preencha seus dados pessoais">
         <form [formGroup]="docsFormGroup">
           <div class="row">
