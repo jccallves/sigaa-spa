@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <form [formGroup]="cadastroDisciplinaFormGroup">
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8 d-grid gap-2">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="codigo" placeholder="Código da disciplina">
+        <mat-error *ngIf="!cadastroDisciplinaFormGroup.controls['codigo'].valid && cadastroDisciplinaFormGroup.controls['codigo'].touched">
+          {{ getErrorCodigo() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="descricao" placeholder="Nome da disciplina">
+        <mat-error *ngIf="!cadastroDisciplinaFormGroup.controls['descricao'].valid && cadastroDisciplinaFormGroup.controls['descricao'].touched">
+          {{ getErrorNome() }}
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="salvarDisciplina()">Salvar</button>
+
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</form>
+</div>
+<div class="loader" *ngIf="exibirSpinner">
+  <mat-spinner color="primary"></mat-spinner>
+</div>
+
+

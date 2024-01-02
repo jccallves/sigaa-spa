@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SidenavComponent } from '../template/sidenav/sidenav.component';
 import { AuthGuard } from 'src/app/core/guards/auth-guard.service';
 import { Roles } from 'src/app/shared/enum/roles';
-import { BodyComponent } from '../template/body/body.component';
 
 
 const routes: Routes = [
@@ -18,6 +17,13 @@ const routes: Routes = [
       },
       {
         path: 'professor', loadChildren: () => import('./professor/professor.module').then(m => m.ProfessorModule),
+        canActivate: [AuthGuard],
+        data: {
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
+        }
+      },
+      {
+        path: 'disciplina', loadChildren: () => import('./disciplina/disciplina.module').then(m => m.DisciplinaModule),
         canActivate: [AuthGuard],
         data: {
           roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
