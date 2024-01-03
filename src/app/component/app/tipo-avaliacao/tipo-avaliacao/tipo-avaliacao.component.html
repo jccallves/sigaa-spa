@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <form [formGroup]="cadastroTipoAvaliacaoFormGroup">
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8 d-grid gap-2">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <input matInput formControlName="tipo" placeholder="Tipo de avaliação">
+        <mat-error *ngIf="!cadastroTipoAvaliacaoFormGroup.controls['tipo'].valid && cadastroTipoAvaliacaoFormGroup.controls['tipo'].touched">
+          {{ getErrorTipo() }}
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="salvarTipoAvaliacao()">Salvar</button>
+
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</form>
+</div>
+<div class="loader" *ngIf="exibirSpinner">
+  <mat-spinner color="primary"></mat-spinner>
+</div>
+
+

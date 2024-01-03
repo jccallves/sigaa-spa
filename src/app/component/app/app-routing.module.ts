@@ -28,6 +28,13 @@ const routes: Routes = [
         data: {
           roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
         }
+      },
+      {
+        path: 'tipoAvaliacao', loadChildren: () => import('./tipo-avaliacao/tipo-avaliacao.module').then(m => m.TipoAvaliacaoModule),
+        canActivate: [AuthGuard],
+        data: {
+          roles: [Roles.ADMIN, Roles.GESTAO]
+        }
       }
     ]
   },
