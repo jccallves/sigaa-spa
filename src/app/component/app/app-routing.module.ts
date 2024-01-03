@@ -12,7 +12,7 @@ const routes: Routes = [
         path: 'cadastro', loadChildren: () => import('./cadastro/cadastro.module').then(m => m.CadastroModule),
         canActivate: [AuthGuard],
         data: {
-          roles: [Roles.ADMIN, Roles.USER_EDIT]
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
         }
       },
       {
@@ -33,7 +33,14 @@ const routes: Routes = [
         path: 'tipoAvaliacao', loadChildren: () => import('./tipo-avaliacao/tipo-avaliacao.module').then(m => m.TipoAvaliacaoModule),
         canActivate: [AuthGuard],
         data: {
-          roles: [Roles.ADMIN, Roles.GESTAO]
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
+        }
+      },
+      {
+        path: 'tipoQuestao', loadChildren: () => import('./tipo-questao/tipo-questao.module').then(m => m.TipoQuestaoModule),
+        canActivate: [AuthGuard],
+        data: {
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
         }
       }
     ]

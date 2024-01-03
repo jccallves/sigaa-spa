@@ -1,0 +1,10 @@
+.loader {
+  width: 8em;
+  height: 8em;
+  display: block;
+  position: absolute;
+  top: 50%;
+  z-index: 7000;
+  left: 50%;
+  transform: translateX(-50%);
+}

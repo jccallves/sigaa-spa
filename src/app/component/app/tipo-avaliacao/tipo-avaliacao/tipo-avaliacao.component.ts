@@ -49,8 +49,8 @@ export class TipoAvaliacaoComponent implements OnInit {
       })
     )
     .subscribe({
-      next: disciplinaResponse => {
-        this.mapperTipoAvaliacao2Form(disciplinaResponse)
+      next: tipoAvaliacaoResponse => {
+        this.mapperTipoAvaliacao2Form(tipoAvaliacaoResponse)
         this.formGroupDirective.resetForm();
           this.openSnackBar("Tipo de avaliação cadastrada com sucesso.", "X")
       },
