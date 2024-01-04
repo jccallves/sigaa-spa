@@ -8,6 +8,8 @@ import { Contato } from 'src/app/core/models/contato.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfessorService } from 'src/app/core/services/professor.service';
 import { AuthenticationService } from 'src/app/core/auth/authentication.service';
+import { RotasApp } from 'src/app/shared/enum/rotas-app';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-professor',
@@ -28,11 +30,16 @@ export class ProfessorComponent implements OnInit {
     private enderecoService: EndereconService,
     private professorService: ProfessorService,
     private authService: AuthenticationService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  voltaraoMenuCadastro() {
+    this.router.navigate([RotasApp.CADASTRO]);
   }
 
   salvarUsuario() {

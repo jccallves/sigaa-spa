@@ -1,26 +1,26 @@
 <div class="container-fluid">
-  <form [formGroup]="cadastroTipoAvaliacaoFormGroup">
+  <form [formGroup]="cadastroNivelQuestaoFormGroup">
 	<div class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8 d-grid gap-2">
       <mat-card >
         <mat-card-header>
-          <mat-card-title>Tipo de avaliação</mat-card-title>
-          <mat-card-subtitle>Cadastramento de tipo de avaliação</mat-card-subtitle>
+          <mat-card-title>Nível de questão</mat-card-title>
+          <mat-card-subtitle>Cadastramento de nível de questão</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="d-grid gap-2">
           <mat-form-field appearance="outline">
-            <mat-label>Tipo</mat-label>
-            <input matInput formControlName="tipo" placeholder="Tipo de avaliação">
-            <mat-error *ngIf="!cadastroTipoAvaliacaoFormGroup.controls['tipo'].valid && cadastroTipoAvaliacaoFormGroup.controls['tipo'].touched">
-              {{ getErrorTipo() }}
+            <mat-label>Nível</mat-label>
+            <input matInput formControlName="descricao" placeholder="Tipo de questão">
+            <mat-error *ngIf="!cadastroNivelQuestaoFormGroup.controls['descricao'].valid && cadastroNivelQuestaoFormGroup.controls['descricao'].touched">
+              {{ getErrorDescricao() }}
             </mat-error>
-            <mat-hint>Ex: Prova / Teste / Simulado</mat-hint>
+            <mat-hint>Ex: fácil / médio / difícil</mat-hint>
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="salvarTipoAvaliacao()">Salvar</button>
+          <button mat-raised-button color="primary" (click)="salvarNivelQuestao()">Salvar</button>
           <button mat-raised-button color="primary" (click)="voltaraoMenuCadastro()">Voltar ao menu</button>
         </mat-card-actions>
       </mat-card>

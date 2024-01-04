@@ -42,6 +42,13 @@ const routes: Routes = [
         data: {
           roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
         }
+      },
+      {
+        path: 'nivelQuestao', loadChildren: () => import('./nivel-questao/nivel-questao.module').then(m => m.NivelQuestaoModule),
+        canActivate: [AuthGuard],
+        data: {
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
+        }
       }
     ]
   },

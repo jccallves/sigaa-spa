@@ -1,29 +1,29 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TipoQuestao } from 'src/app/core/models/tipoQuestao.model';
-import { TipoQuestaoService } from 'src/app/core/services/tipoQuestao.service';
+import { NivelQuestao } from 'src/app/core/models/nivelQuestao.model';
+import { NivelQuestaoService } from 'src/app/core/services/nivelQuestao.service';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
 import { RotasApp } from 'src/app/shared/enum/rotas-app';
 
 @Component({
-  selector: 'app-tipo-questao',
-  templateUrl: './tipo-questao.component.html',
-  styleUrls: ['./tipo-questao.component.scss']
+  selector: 'app-nivel-questao',
+  templateUrl: './nivel-questao.component.html',
+  styleUrls: ['./nivel-questao.component.scss']
 })
-export class TipoQuestaoComponent implements OnInit {
+export class NivelQuestaoComponent implements OnInit {
 
-  cadastroTipoQuestaoFormGroup: FormGroup;
+  cadastroNivelQuestaoFormGroup: FormGroup;
   exibirSpinner: boolean = false;
-  tipoQuestao: TipoQuestao;
+  nivelQuestao: NivelQuestao;
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
 
   constructor(
     private _formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private tipoQuestaoService: TipoQuestaoService,
+    private nivelQuestaoService: NivelQuestaoService,
     private router: Router) {
 
     }
@@ -37,19 +37,19 @@ export class TipoQuestaoComponent implements OnInit {
   }
 
   private createForm() {
-    this.cadastroTipoQuestaoFormGroup = this._formBuilder.group({
+    this.cadastroNivelQuestaoFormGroup = this._formBuilder.group({
       descricao: ['', Validators.required],
       id: null,
       ativo: null,
     });
   }
 
-  salvarTipoQuestao() {
-    if (this.cadastroTipoQuestaoFormGroup.valid ) {
+  salvarNivelQuestao() {
+    if (this.cadastroNivelQuestaoFormGroup.valid ) {
 
       this.exibirSpinner = true
-      let tipoQuestao: TipoQuestao = this.mapperForm2TipoQuestao();
-      this.tipoQuestaoService.salvar(tipoQuestao)
+      let nivelQuestao: NivelQuestao = this.mapperForm2NivelQuestao();
+      this.nivelQuestaoService.salvar(nivelQuestao)
     .pipe(
       finalize(() => {
         this.exibirSpinner = false
@@ -57,8 +57,8 @@ export class TipoQuestaoComponent implements OnInit {
       })
     )
     .subscribe({
-      next: tipoQuestaoResponse => {
-        this.mapperTipoQuestao2Form(tipoQuestaoResponse)
+      next: nivelQuestaoResponse => {
+        this.mapperNivelQuestao2Form(nivelQuestaoResponse)
         this.formGroupDirective.resetForm();
           this.openSnackBar("Tipo de questão cadastrada com sucesso.", "X")
       },
@@ -69,15 +69,15 @@ export class TipoQuestaoComponent implements OnInit {
 }
   }
 
-  private mapperForm2TipoQuestao() {
-    let tipoQuestao: TipoQuestao = new TipoQuestao();
-    Object.assign(tipoQuestao, this.cadastroTipoQuestaoFormGroup.value);
-    return tipoQuestao;
+  private mapperForm2NivelQuestao() {
+    let nivelQuestao: NivelQuestao = new NivelQuestao();
+    Object.assign(nivelQuestao, this.cadastroNivelQuestaoFormGroup.value);
+    return nivelQuestao;
   }
 
-  private mapperTipoQuestao2Form(tipoQuestaoResponse: TipoQuestao) {
-    this.tipoQuestao = tipoQuestaoResponse;
-    this.cadastroTipoQuestaoFormGroup.patchValue(tipoQuestaoResponse);
+  private mapperNivelQuestao2Form(nivelQuestaoResponse: NivelQuestao) {
+    this.nivelQuestao = nivelQuestaoResponse;
+    this.cadastroNivelQuestaoFormGroup.patchValue(nivelQuestaoResponse);
   }
 
   private openSnackBar(message: string, action?: string) {
@@ -87,6 +87,7 @@ export class TipoQuestaoComponent implements OnInit {
   }
 
   getErrorDescricao() {
-    return this.cadastroTipoQuestaoFormGroup.get('descricao').hasError('required') ? 'Campo obrigatório' : '';
+    return this.cadastroNivelQuestaoFormGroup.get('descricao').hasError('required') ? 'Campo obrigatório' : '';
   }
+
 }

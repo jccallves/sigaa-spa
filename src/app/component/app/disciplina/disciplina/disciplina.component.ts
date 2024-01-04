@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Disciplina } from 'src/app/core/models/disciplina.model';
 import { finalize } from 'rxjs/operators';
 import { DisciplinaService } from 'src/app/core/services/disciplina.service';
+import { Router } from '@angular/router';
+import { RotasApp } from 'src/app/shared/enum/rotas-app';
 
 @Component({
   selector: 'app-disciplina',
@@ -21,12 +23,17 @@ export class DisciplinaComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private disciplinaService: DisciplinaService
+    private disciplinaService: DisciplinaService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  voltaraoMenuCadastro() {
+    this.router.navigate([RotasApp.CADASTRO]);
   }
 
   salvarDisciplina() {

@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TipoAvaliacao } from 'src/app/core/models/tipoAvaliacao.model';
 import { finalize } from 'rxjs';
 import { TipoAvaliacaoService } from 'src/app/core/services/tipoAvaliacao.service';
+import { Router } from '@angular/router';
+import { RotasApp } from 'src/app/shared/enum/rotas-app';
 
 @Component({
   selector: 'app-tipo-avaliacao',
@@ -21,11 +23,16 @@ export class TipoAvaliacaoComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private tipoAvaliacaoService: TipoAvaliacaoService
+    private tipoAvaliacaoService: TipoAvaliacaoService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  voltaraoMenuCadastro() {
+    this.router.navigate([RotasApp.CADASTRO]);
   }
 
   private createForm() {

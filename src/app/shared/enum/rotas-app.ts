@@ -6,5 +6,6 @@ CADASTRO = '/app/cadastro',
 PROFESSOR = '/app/professor',
 DISCIPLINA = '/app/disciplina',
 TIPOAVALIACAO = '/app/tipoAvaliacao',
-TIPOQUESTAO = '/app/TipoQuestao'
+TIPOQUESTAO = '/app/TipoQuestao',
+NIVELQUESTAO = '/app/NivelQuestao'
 }
