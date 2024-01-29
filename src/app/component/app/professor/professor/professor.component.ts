@@ -75,7 +75,6 @@ export class ProfessorComponent implements OnInit {
   private createForm() {
     let emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     let numberOnlyRegex: RegExp = /^[0-9]*$/
-    let doubleOnlyRegex: RegExp = /^\d{1,2}(\.\d{0,2}){0,1}$/
     this.docsFormGroup = this._formBuilder.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(emailregex)]],

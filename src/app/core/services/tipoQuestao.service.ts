@@ -18,4 +18,8 @@ export class TipoQuestaoService {
     return this.http.post<TipoQuestao>(this.baseUrl, tipoQuestao);
   }
 
+  obterTiposQuestoes(): Observable<TipoQuestao[]>{
+    return this.http.get<TipoQuestao[]>(`${this.baseUrl}/lista`);
+  }
+
 }

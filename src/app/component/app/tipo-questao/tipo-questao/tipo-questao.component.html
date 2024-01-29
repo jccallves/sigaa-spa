@@ -20,7 +20,7 @@
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="salvarTipoQuestao()">Salvar</button>
+          <button mat-raised-button color="primary" (click)="salvarTipoQuestao()" [disabled]="!cadastroTipoQuestaoFormGroup.valid">Salvar</button>
           <button mat-raised-button color="primary" (click)="voltaraoMenuCadastro()">Voltar ao menu</button>
         </mat-card-actions>
       </mat-card>

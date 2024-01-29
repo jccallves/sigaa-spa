@@ -1,0 +1,28 @@
+.example-margin {
+  margin: 0 10px;
+}
+
+table {
+  width: -webkit-fill-available;
+  width: -moz-available;;
+}
+
+table td, th {
+  text-align: center;
+
+}
+
+.loader {
+  width: 8em;
+  height: 8em;
+  display: block;
+  position: absolute;
+  top: 50%;
+  z-index: 7000;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mat-form-field {
+  display: inline;
+}

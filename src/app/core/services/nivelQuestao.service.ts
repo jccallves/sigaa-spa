@@ -19,4 +19,7 @@ export class NivelQuestaoService {
     return this.http.post<NivelQuestao>(this.baseUrl, nivelQuestao);
   }
 
+  obterNiveisQuestoes(): Observable<NivelQuestao[]>{
+    return this.http.get<NivelQuestao[]>(`${this.baseUrl}/lista`);
+  }
 }

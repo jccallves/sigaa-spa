@@ -1,0 +1,228 @@
+<div class="container-fluid">
+  <form [formGroup]="cadastroQuestaoFormGroup">
+    <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8 d-grid gap-2">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Questão</mat-card-title>
+            <mat-card-subtitle>Cadastramento de questão</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="d-grid gap-2">
+            <div class="row ">
+              <div class="col-md-6 d-grid gap-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Código</mat-label>
+                  <input matInput formControlName="codigo" placeholder="Código">
+                  <mat-error
+                    *ngIf="!cadastroQuestaoFormGroup.controls['codigo'].valid && cadastroQuestaoFormGroup.controls['codigo'].touched">
+                    {{ getErrorCodigo() }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 d-grid gap-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Assunto</mat-label>
+                  <input matInput formControlName="assunto" placeholder="Assunto">
+                  <mat-error
+                    *ngIf="!cadastroQuestaoFormGroup.controls['assunto'].valid && cadastroQuestaoFormGroup.controls['assunto'].touched">
+                    {{ getErrorAssunto() }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 d-grid gap-2 d-md-block">
+                <form [formGroup]="cadastroQuestaoFormGroup">
+                  <mat-form-field class="form-element" appearance="outline">
+                    <mat-label>Banca</mat-label>
+                    <input matInput formControlName="banca" placeholder="Banca">
+                  </mat-form-field>
+                </form>
+              </div>
+              <div class="col-md-4 d-grid gap-2 d-md-block">
+                <form [formGroup]="disciplinaFormGroup">
+                  <mat-form-field class="form-element" appearance="outline">
+                    <mat-label>Disciplina</mat-label>
+                    <mat-select matNativeControl formControlName="disciplina" name="disciplina">
+                      <mat-option>Selecione</mat-option>
+                      <mat-option *ngFor="let disciplina of disciplinas" [value]="disciplina">
+                        {{disciplina.descricao}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </form>
+              </div>
+              <div class="col-md-4 d-grid gap-2 d-md-block">
+                <form [formGroup]="nivelQuestaoFormGroup">
+                  <mat-form-field class="form-element" appearance="outline">
+                    <mat-label>Nivel da questão</mat-label>
+                    <mat-select matNativeControl formControlName="nivelQuestao" name="nivelQuestao">
+                      <mat-option>Selecione</mat-option>
+                      <mat-option *ngFor="let nivel of niveis" [value]="nivel">
+                        {{nivel.descricao}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 d-grid gap-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Questão</mat-label>
+                  <textarea matInput formControlName="descricao" placeholder="Escreva a questão..." rows="8"></textarea>
+                  <mat-error
+                    *ngIf="!cadastroQuestaoFormGroup.controls['descricao'].valid && cadastroQuestaoFormGroup.controls['descricao'].touched">
+                    {{ getErrorDescricao() }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 d-grid gap-2">
+                <form [formGroup]="tipoQuestaoFormGroup">
+                  <mat-form-field class="form-element" appearance="outline">
+                    <mat-label>Tipo de questão</mat-label>
+                    <mat-select matNativeControl formControlName="tipoQuestao" name="tipoQuestao">
+                      <mat-option>Selecione</mat-option>
+                      <mat-option *ngFor="let tipo of tipos" [value]="tipo"
+                        (onSelectionChange)="chooseQuestionType($event)">
+                        {{tipo.descricao}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 d-grid gap-2">
+                <mat-card *ngIf="habilitaOpcoes">
+                  <mat-card-content>
+                    <h4 class="example-h2">{{mensagemTipoQuestao}}</h4>
+                    <mat-radio-group aria-label="Select an option">
+                      <mat-radio-button class="example-margin" [value]="7"
+                        (change)="getNumRespostas($event)">3</mat-radio-button>
+                      <mat-radio-button class="example-margin" [value]="8"
+                        (change)="getNumRespostas($event)">4</mat-radio-button>
+                      <mat-radio-button class="example-margin" [value]="9"
+                        (change)="getNumRespostas($event)">5</mat-radio-button>
+                    </mat-radio-group>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+              <div class="col-md-4 d-grid gap-2">
+                <form [formGroup]="respostasFormGroup">
+                  <mat-card *ngIf="exibirOpcoes">
+                    <mat-card-content>
+                      <mat-form-field appearance="outline" *ngIf="habilita3Opcoes">
+                        <mat-label>Opção 1</mat-label>
+                        <span matPrefix>a) &nbsp;</span>
+                        <input matInput formControlName="opcao1" placeholder="">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" *ngIf="habilita3Opcoes">
+                        <mat-label>Opção 2</mat-label>
+                        <span matPrefix>b) &nbsp;</span>
+                        <input matInput formControlName="opcao2" placeholder="">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" *ngIf="habilita3Opcoes">
+                        <mat-label>Opção 3</mat-label>
+                        <span matPrefix>c) &nbsp;</span>
+                        <input matInput formControlName="opcao3" placeholder="">
+                      </mat-form-field>
+                    </mat-card-content>
+                  </mat-card>
+                </form>
+              </div>
+              <div class="col-md-4 d-grid gap-2">
+                <form [formGroup]="respostasFormGroup">
+                  <mat-card *ngIf="habilita4Opcoes">
+                    <mat-card-content>
+                      <mat-form-field appearance="outline" *ngIf="habilita4Opcoes">
+                        <mat-label>Opção 4</mat-label>
+                        <span matPrefix>d) &nbsp;</span>
+                        <input matInput formControlName="opcao4" placeholder="">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" *ngIf="habilita5Opcoes">
+                        <mat-label>Opção 5</mat-label>
+                        <span matPrefix>e) &nbsp;</span>
+                        <input matInput formControlName="opcao5" placeholder="">
+                      </mat-form-field>
+                    </mat-card-content>
+                  </mat-card>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 d-grid gap-2">
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-12 d-grid gap-2">
+                <mat-card>
+                  <mat-card-header>
+                    <mat-card-title-group>
+                      <mat-card-title>Imagem</mat-card-title>
+                      <mat-card-subtitle>Inserir imagem na questão</mat-card-subtitle>
+                    </mat-card-title-group>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <form [formGroup]="uploadArquivoFormGroup" class="form">
+                      <table>
+                        <thead>
+                          <tr class="">
+                            <th>Nome do arquivo</th>
+                            <th>Anexar arquivo</th>
+                            <th>Remover arquivo</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="items"
+                          *ngFor="let item of cadastroQuestaoFormGroupGB.controls; let i = index">
+                          <tr [formGroupName]="i">
+                            <td>
+                              <mat-form-field class="form-element-desc input-lista-editais">
+                                <input matInput formControlName="nomeArquivo" type="text" />
+                              </mat-form-field>
+                            </td>
+                            <td>
+                              <div *ngIf="!item.get('id').value">
+                                <input hidden placeholder="Arquivo" #fileInput (change)="onFileChange($event, i)"
+                                  type="file" required accept=".png" />
+                                <button (click)="fileInput.click()" mat-mini-fab color="primary" class="upload-btn">
+                                  <mat-icon>attach_file</mat-icon>
+                                </button>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="btn-remover">
+                                <button mat-mini-fab color="primary" (click)="removeArquivo(i)" type="button"
+                                  matTooltip="Remover arquivo">
+                                  <mat-icon>delete_forever</mat-icon>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </form>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div> -->
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="salvarQuestao()"
+              [disabled]="!cadastroQuestaoFormGroup.valid">Salvar</button>
+            <button mat-raised-button color="primary" (click)="voltaraoMenuCadastro()">Voltar ao menu</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+  </form>
+  <div class="loader" *ngIf="exibirSpinner">
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+</div>

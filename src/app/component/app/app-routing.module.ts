@@ -49,6 +49,13 @@ const routes: Routes = [
         data: {
           roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
         }
+      },
+      {
+        path: 'questao', loadChildren: () => import('./questao/questao.module').then(m => m.QuestaoModule),
+        canActivate: [AuthGuard],
+        data: {
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
+        }
       }
     ]
   },
