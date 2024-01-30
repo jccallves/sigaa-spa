@@ -27,6 +27,9 @@ import { QuestaoService } from 'src/app/core/services/questao.service';
 import { TipoQuestaoService } from 'src/app/core/services/tipoQuestao.service';
 import { RotasApp } from 'src/app/shared/enum/rotas-app';
 import { finalize } from 'rxjs';
+import { Pessoa } from 'src/app/core/models/pessoa.model';
+import { AuthenticationService } from 'src/app/core/auth/authentication.service';
+import { PessoaDTO } from 'src/app/core/models/pessoaDTO.model';
 
 @Component({
   selector: 'app-questao',
@@ -52,6 +55,7 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
   habilita4Opcoes: boolean = false;
   habilita5Opcoes: boolean = false;
   exibirOpcoes: boolean = false;
+  pessoa: PessoaDTO;
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
   @ViewChild(MatTable) table: MatTable<Questao>;
@@ -64,7 +68,8 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
     private questaoService: QuestaoService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +77,7 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
     this.carregarDisciplinas();
     this.carregarNiveisQuestoes();
     this.carregarTiposQuestoes();
+    this.pessoa = this.authService.getCurrentUser;
   }
 
   ngAfterViewChecked(): void {
@@ -129,9 +135,9 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
 
   private createForm() {
     this.cadastroQuestaoFormGroup = this.formBuilder.group({
-      codigo: ['qweqwe', Validators.required],
-      assunto: ['qweqweqw', [Validators.required]],
-      descricao: ['qweqweqw', [Validators.required]],
+      codigo: ['', Validators.required],
+      assunto: ['', [Validators.required]],
+      descricao: ['', [Validators.required]],
       banca: '',
       id: null,
       ativo: null,
@@ -197,11 +203,11 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
   }
 
   carregarTiposQuestoes() {
-    this.exibirSpinner = false;
+    this.exibirSpinner = true;
     this.tipoQuestaoService.obterTiposQuestoes().subscribe({
       next: (data) => {
         this.tipos = data;
-        this.exibirSpinner = true;
+        this.exibirSpinner = false;
       },
       error: (error) => {
         this.openSnackBar('Error ao tentar obter os tipos de questões.', 'x');
@@ -259,6 +265,7 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
     Object.assign(questao, this.nivelQuestaoFormGroup.value);
     Object.assign(questao, this.tipoQuestaoFormGroup.value);
     questao.respostas = resposta;
+    questao.pessoa = this.pessoa;
     return questao;
   }
 

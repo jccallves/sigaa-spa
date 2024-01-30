@@ -1,5 +1,7 @@
 import { Disciplina } from "./disciplina.model";
 import { NivelQuestao } from "./nivelQuestao.model";
+import { Pessoa } from "./pessoa.model";
+import { PessoaDTO } from "./pessoaDTO.model";
 import { Resposta } from "./resposta.model";
 import { TipoQuestao } from "./tipoQuestao.model";
 
@@ -19,5 +21,6 @@ export interface Questao{
   nivelQuestao: NivelQuestao;
   tipoQuestao: TipoQuestao;
   respostas: Resposta;
+  pessoa: PessoaDTO;
   ativo: boolean;
 }
