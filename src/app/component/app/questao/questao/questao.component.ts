@@ -27,7 +27,6 @@ import { QuestaoService } from 'src/app/core/services/questao.service';
 import { TipoQuestaoService } from 'src/app/core/services/tipoQuestao.service';
 import { RotasApp } from 'src/app/shared/enum/rotas-app';
 import { finalize } from 'rxjs';
-import { Pessoa } from 'src/app/core/models/pessoa.model';
 import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 import { PessoaDTO } from 'src/app/core/models/pessoaDTO.model';
 

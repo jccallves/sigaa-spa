@@ -56,6 +56,13 @@ const routes: Routes = [
         data: {
           roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
         }
+      },
+      {
+        path: 'assunto', loadChildren: () => import('./assunto/assunto.module').then(m => m.AssuntoModule),
+        canActivate: [AuthGuard],
+        data: {
+          roles: [Roles.ADMIN, Roles.GESTAO, Roles.USER_EDIT]
+        }
       }
     ]
   },

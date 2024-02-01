@@ -7,5 +7,6 @@ PROFESSOR = '/app/professor',
 DISCIPLINA = '/app/disciplina',
 TIPOAVALIACAO = '/app/tipoAvaliacao',
 TIPOQUESTAO = '/app/TipoQuestao',
-NIVELQUESTAO = '/app/NivelQuestao'
+NIVELQUESTAO = '/app/NivelQuestao',
+ASSUNTO = '/app/assunto'
 }
