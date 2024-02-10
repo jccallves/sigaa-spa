@@ -24,4 +24,7 @@ export class AssuntoService {
     return this.http.get<Assunto[]>(`${this.baseUrl}/lista`);
   }
 
+  obterAssuntoByDisciplina(disciplina: Disciplina): Observable<Assunto[]> {
+    return this.http.get<Assunto[]>(`${this.baseUrl}/disciplina?id=${disciplina.id}`);
+  }
 }

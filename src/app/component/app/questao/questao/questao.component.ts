@@ -29,6 +29,8 @@ import { RotasApp } from 'src/app/shared/enum/rotas-app';
 import { finalize } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 import { PessoaDTO } from 'src/app/core/models/pessoaDTO.model';
+import { Assunto } from 'src/app/core/models/assunto.model';
+import { AssuntoService } from 'src/app/core/services/assunto.service';
 
 @Component({
   selector: 'app-questao',
@@ -42,10 +44,12 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
   nivelQuestaoFormGroup: FormGroup
   disciplinaFormGroup: FormGroup
   uploadArquivoFormGroup: FormGroup;
+  assuntoFormGroup: FormGroup;
   exibirSpinner: boolean = false;
   disciplinas: Disciplina[];
   niveis: NivelQuestao[];
   tipos: TipoQuestao[];
+  assuntos: Assunto[];
   questao: Questao;
   items: FormArray;
   mensagemTipoQuestao: string;
@@ -65,6 +69,7 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
     private tipoQuestaoService: TipoQuestaoService,
     private nivelQuestaoService: NivelQuestaoService,
     private questaoService: QuestaoService,
+    private assuntoService: AssuntoService,
     private snackBar: MatSnackBar,
     private router: Router,
     private cd: ChangeDetectorRef,
@@ -135,7 +140,6 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
   private createForm() {
     this.cadastroQuestaoFormGroup = this.formBuilder.group({
       codigo: ['', Validators.required],
-      assunto: ['', [Validators.required]],
       descricao: ['', [Validators.required]],
       banca: '',
       id: null,
@@ -153,12 +157,15 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
     this.disciplinaFormGroup = this.formBuilder.group({
       disciplina: ['', [Validators.required]],
     });
+    this.assuntoFormGroup = this.formBuilder.group({
+      assunto: ['', [Validators.required]],
+    });
     this.respostasFormGroup = this.formBuilder.group({
-      opcao1: null,
-      opcao2: null,
-      opcao3: null,
-      opcao4: null,
-      opcao5: null,
+      opcao1: '',
+      opcao2: '',
+      opcao3: '',
+      opcao4: '',
+      opcao5: '',
     });
   }
 
@@ -186,6 +193,20 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
         this.openSnackBar('Error ao tentar obter dados de disciplinas.', 'x');
       },
     });
+  }
+
+  selectAssuntoByDisciplina(disciplina: Disciplina) {
+    this.exibirSpinner = true;
+    this.assuntoService.obterAssuntoByDisciplina(disciplina).subscribe({
+      next: (data) => {
+        this.assuntos = data;
+        this.exibirSpinner = false;
+      },
+      error: (error) => {
+        this.openSnackBar('Error ao tentar obter dados de disciplinas.', 'x');
+      },
+    });
+
   }
 
   carregarNiveisQuestoes() {
@@ -263,6 +284,7 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
     Object.assign(questao, this.disciplinaFormGroup.value);
     Object.assign(questao, this.nivelQuestaoFormGroup.value);
     Object.assign(questao, this.tipoQuestaoFormGroup.value);
+    Object.assign(questao, this.assuntoFormGroup.value);
     questao.respostas = resposta;
     questao.pessoa = this.pessoa;
     return questao;
@@ -274,13 +296,15 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
     this.disciplinaFormGroup.get('disciplina').patchValue(questaoResponse.disciplina);
     this.nivelQuestaoFormGroup.get('nivelQuestao').patchValue(questaoResponse.nivelQuestao);
     this.tipoQuestaoFormGroup.get('tipoQuestao').patchValue(questaoResponse.tipoQuestao);
+    this.assuntoFormGroup.get('assunto').patchValue(questaoResponse.assunto);
   }
 
   salvarQuestao() {
     if (this.cadastroQuestaoFormGroup.valid &&
       this.disciplinaFormGroup.valid &&
       this.tipoQuestaoFormGroup.valid &&
-      this.nivelQuestaoFormGroup.valid) {
+      this.nivelQuestaoFormGroup.valid &&
+      this.assuntoFormGroup.valid) {
       this.exibirSpinner = true
       let questao: Questao = this.mapperForm2Questao();
       this.questaoService.salvar(questao)
@@ -308,12 +332,6 @@ export class QuestaoComponent implements OnInit, AfterViewChecked {
 
   getErrorCodigo() {
     return this.cadastroQuestaoFormGroup.get('codigo').hasError('required')
-      ? 'Campo obrigatório'
-      : '';
-  }
-
-  getErrorAssunto() {
-    return this.cadastroQuestaoFormGroup.get('assunto').hasError('required')
       ? 'Campo obrigatório'
       : '';
   }

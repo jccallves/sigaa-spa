@@ -22,18 +22,6 @@
                 </mat-form-field>
               </div>
               <div class="col-md-6 d-grid gap-2">
-                <mat-form-field appearance="outline">
-                  <mat-label>Assunto</mat-label>
-                  <input matInput formControlName="assunto" placeholder="Assunto">
-                  <mat-error
-                    *ngIf="!cadastroQuestaoFormGroup.controls['assunto'].valid && cadastroQuestaoFormGroup.controls['assunto'].touched">
-                    {{ getErrorAssunto() }}
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 d-grid gap-2 d-md-block">
                 <form [formGroup]="cadastroQuestaoFormGroup">
                   <mat-form-field class="form-element" appearance="outline">
                     <mat-label>Banca</mat-label>
@@ -41,14 +29,30 @@
                   </mat-form-field>
                 </form>
               </div>
+            </div>
+            <div class="row">
               <div class="col-md-4 d-grid gap-2 d-md-block">
                 <form [formGroup]="disciplinaFormGroup">
                   <mat-form-field class="form-element" appearance="outline">
                     <mat-label>Disciplina</mat-label>
-                    <mat-select matNativeControl formControlName="disciplina" name="disciplina">
+                    <mat-select matNativeControl formControlName="disciplina" name="disciplina" >
                       <mat-option>Selecione</mat-option>
-                      <mat-option *ngFor="let disciplina of disciplinas" [value]="disciplina">
+                      <mat-option *ngFor="let disciplina of disciplinas"  [value]="disciplina" (onSelectionChange)="selectAssuntoByDisciplina(disciplina)">
                         {{disciplina.descricao}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </form>
+
+              </div>
+              <div class="col-md-4 d-grid gap-2 d-md-block">
+                <form [formGroup]="assuntoFormGroup">
+                  <mat-form-field class="form-element" appearance="outline">
+                    <mat-label>Assunto</mat-label>
+                    <mat-select matNativeControl formControlName="assunto" name="assunto">
+                      <mat-option>Selecione</mat-option>
+                      <mat-option *ngFor="let assunto of assuntos" [value]="assunto">
+                        {{assunto.descricao}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
